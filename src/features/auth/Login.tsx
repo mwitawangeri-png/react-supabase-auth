@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { supabase } from "../../supabase";
 
 export function Login() {
 
@@ -6,9 +7,18 @@ export function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState<string>("");
 
-  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(`Email: ${email} \nPassword: ${password}`)
+    const {error} = await supabase.auth.signInWithPassword({
+        email: email,
+        password: password
+    });
+
+    if(error){
+        console.log(error.message);
+    }else{
+        console.log('Account successfully created');
+    }
   };
   return (
     /* 1. Page wrapper that perfectly centers everything on the screen */
@@ -82,6 +92,7 @@ export function Login() {
           Submit
         </button>
       </form>
+      {}
     </div>
   );
 }
