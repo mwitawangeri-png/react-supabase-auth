@@ -9,7 +9,7 @@ export function Login() {
 
   const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const {error} = await supabase.auth.signInWithPassword({
+    const {error} = await supabase.auth.signUp({
         email: email,
         password: password
     });
