@@ -1,25 +1,49 @@
-import { useState } from "react";
+import { useState} from "react";
 import { supabase } from "../../supabase";
+import { Navigate, useNavigate } from "react-router-dom";
+import { useAuth } from "./AuthContext";
 
 export function Login() {
 
-    
+  const navigate = useNavigate();
+  const  {session} = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState<string>("");
+  const [isLogin, setIsLogin] = useState(true);
 
   const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const {error} = await supabase.auth.signUp({
-        email: email,
-        password: password
-    });
 
-    if(error){
-        console.log(error.message);
-    }else{
-        console.log('Account successfully created');
+    if(isLogin){
+        const { error } = await supabase.auth.signInWithPassword({
+            email: email,
+            password: password,
+          }) ;
+          if(error){
+            console.log(error.message);
+          }else{
+            console.log('Login Successful');
+            navigate("/");
+          }
+    }
+    else{
+        const {error} = await supabase.auth.signUp({
+            email: email,
+            password: password
+        });
+    
+            if(error){
+                console.log(error.message);
+            }else{
+                console.log('Account successfully created');
+                navigate("/");
+        }
     }
   };
+
+if(session){
+    return <Navigate replace to="/"/>;
+}
   return (
     /* 1. Page wrapper that perfectly centers everything on the screen */
     <div style={{
@@ -31,7 +55,7 @@ export function Login() {
       fontFamily: 'sans-serif'
     }}>
       
-      <h2 style={{ marginBottom: '20px' }}>LOGIN</h2>
+      <h2 style={{ marginBottom: '20px' }}>{isLogin?"Log in": "Sign Up"}</h2>
       
       {/* 2. Main Form Card Wrapper */}
       <form style={{
@@ -91,8 +115,10 @@ export function Login() {
         }}>
           Submit
         </button>
-      </form>
-      {}
+        <div onClick={() =>setIsLogin(!isLogin)} style={{display: 'flex', justifyContent: 'center', gap: '5px', fontSize: '14px', width: 'fit-content', cursor: 'pointer'}}>
+            {(isLogin)?(<><p>Dont have an account</p><p style={{color: 'blue'}}>Sign Up</p></>):(<><p>Already have an account </p><p style={{color: 'blue'}}>Log in</p></>)}
+            </div>
+      </form> 
     </div>
   );
 }

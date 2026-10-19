@@ -1,0 +1,13 @@
+import { Navigate } from "react-router-dom";
+import { useAuth } from "./AuthContext";
+import { type ReactNode } from "react";
+
+export function ProtectedRoute({children}: {children: ReactNode}){
+    const {session} = useAuth();
+
+    if(!session){
+        return <Navigate replace to="/login"/>
+    }
+
+    return children;
+}
