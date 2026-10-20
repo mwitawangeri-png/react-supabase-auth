@@ -6,6 +6,7 @@ import { ProtectedRoute } from "./features/auth/ProtectedRoute";
 import { useAuth } from "./features/auth/AuthContext";
 import { supabase } from "./supabase";
 import './App.css'
+import { ProDashboard } from "./pages/ProDashboard";
 
 export default function App(){
 
@@ -16,6 +17,7 @@ export default function App(){
         {(session)?<>
           <Link to="/">Home</Link>
           <Link to="/dashboard">Dashboard</Link>
+          <Link to ="/pro-dashboard">Pro Dashboard</Link>
           <button onClick={() => supabase.auth.signOut()}>Log Out</button>
         </>:<>
           <Link to="/">Home</Link>
@@ -27,6 +29,7 @@ export default function App(){
       <Route path="/" element={<Home/>} />
       <Route path="/dashboard" element={<ProtectedRoute><Dashboard/></ProtectedRoute>} />
       <Route path="/login" element={<Login/>} />
+      <Route path="/pro-dashboard" element={<ProtectedRoute><ProDashboard/></ProtectedRoute>}/>
     </Routes>
     </div>
   );
