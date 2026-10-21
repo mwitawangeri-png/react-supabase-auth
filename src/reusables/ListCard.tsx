@@ -1,34 +1,10 @@
-export interface Item {
-    id: number;
-    title: string;
-    price: string;
-  }
+import { type course } from "./courseSchema";
 
 interface ListCardProps{
- Item: Item;
+ Course: course;
 }
 
-export function ListCard({Item}: ListCardProps){
-    return(
-        
-        <div style={{border: '1px solid grey', borderRadius: '8px'}}>
-        <p>{Item.title}</p>
-        <p>{Item.price}</p>
-        </div>
-        );
-}
-
-export default function CourseCard() {
-    // Standalone mock data
-    const course = {
-      title: "Advanced Full-Stack Web Development",
-      description: "Master building scalable backend architectures, relational databases, and dynamic API bindings for production apps.",
-      tutor: "Felix Mwita",
-      date: "Oct 21, 2026",
-      isFree: false,
-      imageUrl: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80"
-    };
-  
+export default function CourseCard({Course}: ListCardProps) {
     // Typed as React.CSSProperties to prevent TypeScript errors on properties like flexDirection
     const cardStyle: React.CSSProperties = {
       
@@ -60,7 +36,7 @@ export default function CourseCard() {
   
     const tagStyle: React.CSSProperties = {
       alignSelf: 'flex-start',
-      backgroundColor: course.isFree ? '#047857' : '#0f172a',
+      backgroundColor: Course.isPremium ?'#0f172a': '#047857' ,
       color: '#ffffff',
       padding: '3px 10px',
       borderRadius: '4px',
@@ -104,19 +80,19 @@ export default function CourseCard() {
     return (
       <div style={cardStyle}>
         <img 
-          src={course.imageUrl} 
-          alt={course.title} 
+          src={Course.Image} 
+          alt={Course.Title} 
           style={imageStyle} 
         />
         <div style={contentStyle}>
           <span style={tagStyle}>
-            {course.isFree ? 'Free Course' : 'Paid Course'}
+            {Course.isPremium? 'Paid': 'Free'}
           </span>
-          <h3 style={titleStyle}>{course.title}</h3>
-          <p style={descriptionStyle}>{course.description}</p>
+          <h3 style={titleStyle}>{Course.Title}</h3>
+          <p style={descriptionStyle}>{Course.Description}</p>
           <div style={footerStyle}>
-            <span>Tutor: <strong style={tutorStyle}>{course.tutor}</strong></span>
-            <span>{course.date}</span>
+            <span>Tutor: <strong style={tutorStyle}>{Course.Tutor}</strong></span>
+            <span>{Course.created_at}</span>
           </div>
         </div>
       </div>
