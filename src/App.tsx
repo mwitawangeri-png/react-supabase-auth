@@ -12,8 +12,8 @@ export default function App(){
 
   const {session} = useAuth();
   return(
-    <div>
-      <nav style={{ padding: '10px', borderBottom: '1px solid #ccc', marginBottom: '20px' }}>
+    <div className="Body">
+      <nav className='NavParent' style={{ padding: '10px', borderBottom: '1px solid #ccc', marginBottom: '20px' }}>
         {(session)?<>
           <Link to="/">Home</Link>
           <Link to="/dashboard">Dashboard</Link>
