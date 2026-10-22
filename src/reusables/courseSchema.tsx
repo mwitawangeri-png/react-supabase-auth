@@ -1,9 +1,9 @@
-export interface course{
+export interface Course{
     id: string;
     Description: string;
     Image: string;
     Title: string;
     Tutor: string;
-    isPremium: boolean;
+    priced: boolean;
     created_at: string;
 }

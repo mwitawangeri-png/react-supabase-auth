@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import CourseCard from "../reusables/ListCard";
 import { supabase } from "../supabase";
-import { type course } from "../reusables/courseSchema";
+import { type Course } from "../reusables/courseSchema";
 
 export function ProDashboard(){
 
-const [courses, setCourses] = useState<course[]>([]);
+const [courses, setCourses] = useState<Course[]>([]);
 
 
 useEffect(() => {

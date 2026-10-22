@@ -1,7 +1,7 @@
-import { type course } from "./courseSchema";
+import { type Course } from "./courseSchema";
 
 interface ListCardProps{
- Course: course;
+ Course: Course;
 }
 
 export default function CourseCard({Course}: ListCardProps) {
@@ -36,7 +36,7 @@ export default function CourseCard({Course}: ListCardProps) {
   
     const tagStyle: React.CSSProperties = {
       alignSelf: 'flex-start',
-      backgroundColor: Course.isPremium ?'#0f172a': '#047857' ,
+      backgroundColor: Course.priced ?'#0f172a': '#047857' ,
       color: '#ffffff',
       padding: '3px 10px',
       borderRadius: '4px',
@@ -86,7 +86,7 @@ export default function CourseCard({Course}: ListCardProps) {
         />
         <div style={contentStyle}>
           <span style={tagStyle}>
-            {Course.isPremium? 'Paid': 'Free'}
+            {Course.priced? 'Paid': 'Free'}
           </span>
           <h3 style={titleStyle}>{Course.Title}</h3>
           <p style={descriptionStyle}>{Course.Description}</p>
