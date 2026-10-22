@@ -64,7 +64,7 @@ useEffect(() => {
                     {courses.map((course) => {
 
                         return (
-                            <CourseCard key={course.id} Course={course}/>
+                            <CourseCard key={course.id} Course={course} openModal={openModal}/>
 
                         );
                     })}

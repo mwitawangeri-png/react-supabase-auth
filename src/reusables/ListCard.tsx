@@ -1,10 +1,13 @@
 import { type Course } from "./courseSchema";
 
+export type ModalType = 'info' | 'pro-alert' | 'edit' | 'delete' | null;
+
 interface ListCardProps{
  Course: Course;
+ openModal: (course: Course, type: ModalType) => void;
 }
 
-export default function CourseCard({Course}: ListCardProps) {
+export default function CourseCard({Course, openModal}: ListCardProps) {
     // Typed as React.CSSProperties to prevent TypeScript errors on properties like flexDirection
     const cardStyle: React.CSSProperties = {
       
@@ -103,7 +106,9 @@ export default function CourseCard({Course}: ListCardProps) {
     };
   
     return (
-      <div style={cardStyle}>
+      <div style={cardStyle}
+      onClick={() => openModal(Course, Course.priced?'pro-alert':'info')}
+      >
 <div style={imageContainerStyle}>
           <img 
             src={Course.Image} 
