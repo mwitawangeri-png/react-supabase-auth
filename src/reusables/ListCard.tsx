@@ -18,7 +18,8 @@ export default function CourseCard({Course, openModal}: ListCardProps) {
       fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
       border: '1px solid #e2e8f0',
       display: 'flex',
-      flexDirection: 'column'
+      flexDirection: 'column',
+      cursor: Course.priced? 'url("https://img.icons8.com/fluency/48/lock-2--v1.png"), auto': 'pointer'
     };
 
     const imageContainerStyle: React.CSSProperties = {
